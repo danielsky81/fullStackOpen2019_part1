@@ -1,1 +1,1 @@
-# Full Stack Open 2019 - part1
+# Full Stack Open 2019 - exercises part1
