@@ -1,67 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Header = (props) => {
-    return (
-        <div>
-            <h1>{props.course.name}</h1>
-        </div>
-    )
-}
+const Header = ({header}) => (
+    <h1>{header}</h1>
+)
 
-const Part = (props) => {
-    return (
-        <div>
-            <p>{props.part} {props.exercises}</p>
-        </div>
-    )
-}
+const Button = ({onClick, text}) => (
+    <button onClick={onClick}>{text}</button>
+)
 
-const Content = (props) => {
-    return (
-        <div>
-            <Part part={props.course.parts[0].name} exercises={props.course.parts[0].exercises}/>
-            <Part part={props.course.parts[1].name} exercises={props.course.parts[1].exercises}/>
-            <Part part={props.course.parts[2].name} exercises={props.course.parts[2].exercises}/>
-        </div>
-    )
-}
-
-const Total = (props) => {
-    return (
-        <div>
-            <p>Number of exercises {props.course.parts[0].exercises + props.course.parts[1].exercises + props.course.parts[2].exercises}</p>
-        </div>
-    )
-
-}
+const Stats = ({text, value}) => (
+    <p>{text} {value}</p>
+)
 
 const App = () => {
-    const course = {
-        name: 'Half Stack application development',
-        parts: [
-            {
-                name: 'Fundamentals of React',
-                exercises: 10
-            },
-            {
-                name: 'Using props to pass data',
-                exercises: 7
-            },
-            {
-                name: 'State of a component',
-                exercises: 14
-            }
-        ]
-    }
+    // save clicks of each button to own state
+    const header1 = 'give feedback'
+    const header2 = 'statistics'
+    const text1 = 'good'
+    const text2 = 'neutral'
+    const text3 = 'bad'
+    const [good, setGood] = useState(0)
+    const [neutral, setNeutral] = useState(0)
+    const [bad, setBad] = useState(0)
 
-    return (
-        <div>
-            <Header course={course} />
-            <Content course={course}/>
-            <Total course={course}/>
-        </div>
-    )
+    const handleGoodClick = (value) => setGood(value)
+    const handleNeutralClick = (value) => setNeutral(value)
+    const handleBadClick = (value) => setBad(value)
+
+  return (
+    <div>
+        <Header header={header1}/>
+        <Button onClick={() => handleGoodClick(good + 1)} text={text1}/>
+        <Button onClick={() => handleNeutralClick(neutral + 1)} text={text2}/>
+        <Button onClick={() => handleBadClick(bad + 1)} text={text3}/>
+        <Header header={header2}/>
+        <Stats text={text1} value={good}/>
+        <Stats text={text2} value={neutral}/>
+        <Stats text={text3} value={bad}/>
+    </div>
+  )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />, 
+    document.getElementById('root')
+)
