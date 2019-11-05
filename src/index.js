@@ -9,8 +9,15 @@ const Button = ({onClick, text}) => (
     <button onClick={onClick}>{text}</button>
 )
 
-const Stats = ({text, value}) => (
-    <p>{text} {value}</p>
+const Stats = (props) => (
+    <div>
+        <p>{props.text1} {props.value1}</p>
+        <p>{props.text2} {props.value2}</p>
+        <p>{props.text3} {props.value3}</p>
+        <p>{props.text4} {props.value4}</p>
+        <p>{props.text5} {props.value5}</p>
+        <p>{props.text6} {props.value6}%</p>
+    </div>
 )
 
 const App = () => {
@@ -41,12 +48,13 @@ const App = () => {
         <Button onClick={() => handleNeutralClick(neutral + 1)} text={text2}/>
         <Button onClick={() => handleBadClick(bad + 1)} text={text3}/>
         <Header header={header2}/>
-        <Stats text={text1} value={good}/>
-        <Stats text={text2} value={neutral}/>
-        <Stats text={text3} value={bad}/>
-        <Stats text={text4} value={all}/>
-        <Stats text={text5} value={average}/>
-        <Stats text={text6} value={positive}/>
+        <Stats 
+            text1={text1} value1={good}
+            text2={text2} value2={neutral}
+            text3={text3} value3={bad}
+            text4={text4} value4={all}
+            text5={text5} value5={average}
+            text6={text6} value6={positive}/>
     </div>
   )
 }
