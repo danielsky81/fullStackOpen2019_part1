@@ -10,13 +10,27 @@ const Button = ({onClick, text}) => (
 )
 
 const Statistic = ({text, value}) => {
-    if (text == 'positive') {
+    if (text === 'positive') {
         return (
-            <p>{text} {value} %</p>        
+            <tr>
+                <td>
+                    <p>{text}</p>
+                </td>
+                <td>
+                    <p>{value} %</p>
+                </td>
+            </tr>
         )
     }   else {
         return (
-            <p>{text} {value}</p>
+            <tr>
+                <td>
+                    <p>{text}</p>
+                </td>
+                <td>
+                    <p>{value}</p>
+                </td>
+            </tr>
         )
     }
 }
@@ -26,12 +40,16 @@ const Statistics = (props) => {
     if (props.value1 > 0 || props.value2 > 0 || props.value3 > 0) {
         return (
             <div>
-                <Statistic text='good' value={props.value1}/>
-                <Statistic text='neutral' value={props.value2}/>
-                <Statistic text='bad' value={props.value3}/>
-                <Statistic text='all' value={props.value4}/>
-                <Statistic text='average' value={props.value5}/>
-                <Statistic text='positive' value={props.value6}/>
+                <table>
+                    <tbody>
+                        <Statistic text='good' value={props.value1}/>
+                        <Statistic text='neutral' value={props.value2}/>
+                        <Statistic text='bad' value={props.value3}/>
+                        <Statistic text='all' value={props.value4}/>
+                        <Statistic text='average' value={props.value5}/>
+                        <Statistic text='positive' value={props.value6}/>
+                    </tbody>
+                </table>
             </div>
         )
     } else {
@@ -56,8 +74,8 @@ const App = () => {
     const handleNeutralClick = (value) => setNeutral(value)
     const handleBadClick = (value) => setBad(value)
     const all = good + neutral + bad
-    const average = (good - bad) / all
-    const positive = (good / all) * 100
+    const average = ((good - bad) / all).toFixed(1)
+    const positive = ((good / all) * 100).toFixed(1)
 
   return (
     <div>
