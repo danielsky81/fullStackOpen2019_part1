@@ -9,16 +9,29 @@ const Button = ({onClick, text}) => (
     <button onClick={onClick}>{text}</button>
 )
 
-const Stats = (props) => {
-    if (props.value1 > 0 || props.value2 > 0 || props.value3 > 0 ) {
+const Statistic = ({text, value}) => {
+    if (text == 'positive') {
+        return (
+            <p>{text} {value} %</p>        
+        )
+    }   else {
+        return (
+            <p>{text} {value}</p>
+        )
+    }
+}
+
+
+const Statistics = (props) => {
+    if (props.value1 > 0 || props.value2 > 0 || props.value3 > 0) {
         return (
             <div>
-                <p>{props.text1} {props.value1}</p>
-                <p>{props.text2} {props.value2}</p>
-                <p>{props.text3} {props.value3}</p>
-                <p>{props.text4} {props.value4}</p>
-                <p>{props.text5} {props.value5}</p>
-                <p>{props.text6} {props.value6}%</p>
+                <Statistic text='good' value={props.value1}/>
+                <Statistic text='neutral' value={props.value2}/>
+                <Statistic text='bad' value={props.value3}/>
+                <Statistic text='all' value={props.value4}/>
+                <Statistic text='average' value={props.value5}/>
+                <Statistic text='positive' value={props.value6}/>
             </div>
         )
     } else {
@@ -35,9 +48,6 @@ const App = () => {
     const text1 = 'good'
     const text2 = 'neutral'
     const text3 = 'bad'
-    const text4 = 'all'
-    const text5 = 'average'
-    const text6 = 'positive'
     const [good, setGood] = useState(0)
     const [neutral, setNeutral] = useState(0)
     const [bad, setBad] = useState(0)
@@ -56,13 +66,13 @@ const App = () => {
         <Button onClick={() => handleNeutralClick(neutral + 1)} text={text2}/>
         <Button onClick={() => handleBadClick(bad + 1)} text={text3}/>
         <Header header={header2}/>
-        <Stats 
-            text1={text1} value1={good}
-            text2={text2} value2={neutral}
-            text3={text3} value3={bad}
-            text4={text4} value4={all}
-            text5={text5} value5={average}
-            text6={text6} value6={positive}/>
+        <Statistics 
+            value1={good}
+            value2={neutral}
+            value3={bad} 
+            value4={all}
+            value5={average}
+            value6={positive}/>
     </div>
   )
 }
