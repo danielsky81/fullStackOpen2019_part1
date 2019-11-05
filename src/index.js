@@ -9,16 +9,24 @@ const Button = ({onClick, text}) => (
     <button onClick={onClick}>{text}</button>
 )
 
-const Stats = (props) => (
-    <div>
-        <p>{props.text1} {props.value1}</p>
-        <p>{props.text2} {props.value2}</p>
-        <p>{props.text3} {props.value3}</p>
-        <p>{props.text4} {props.value4}</p>
-        <p>{props.text5} {props.value5}</p>
-        <p>{props.text6} {props.value6}%</p>
-    </div>
-)
+const Stats = (props) => {
+    if (props.value1 > 0 || props.value2 > 0 || props.value3 > 0 ) {
+        return (
+            <div>
+                <p>{props.text1} {props.value1}</p>
+                <p>{props.text2} {props.value2}</p>
+                <p>{props.text3} {props.value3}</p>
+                <p>{props.text4} {props.value4}</p>
+                <p>{props.text5} {props.value5}</p>
+                <p>{props.text6} {props.value6}%</p>
+            </div>
+        )
+    } else {
+        return (
+            <p>No feedback given</p>
+        )
+    }
+}
 
 const App = () => {
     // save clicks of each button to own state
