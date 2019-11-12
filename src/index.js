@@ -11,12 +11,17 @@ const App = (props) => {
     const random = array => Math.floor(Math.random()*array.length)
     const generateRandom = value => setSelected(value)
     const voting = value => setScore(score[value] += 1)
+    const maxNumber = score.indexOf(Math.max(...score))
     return (
         <div>
+            <h1>Anecdote of the day</h1>
             <p>{props.anecdotes[selected]}</p>
             <p>has {props.score[selected]} votes</p>
             <Button onClick={() => voting(selected)} text='vote' />
             <Button onClick={() => generateRandom(random(anecdotes))} text='next anecdote'/>
+            <h1>Anecdote with most votes</h1>
+            <p>{props.anecdotes[maxNumber]}</p>
+            <p>has {props.score[maxNumber]} votes</p>
         </div>
     )
 }
